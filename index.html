@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>گالری | LUXURY</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Tahoma', sans-serif;
+      color: #eee;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* بک‌گراند انیمیشنی */
+    .background {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at center, #1a1a1a, #0a0a0a);
+      z-index: -3;
+    }
+
+    .glow-layer {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at 30% 20%, rgba(255,215,0,0.08) 0%, transparent 50%);
+      animation: slowglow 40s ease infinite;
+      z-index: -2;
+    }
+
+    .particles {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .glass {
+      background: rgba(20, 20, 20, 0.82);
+      backdrop-filter: blur(28px);
+      border: 1px solid rgba(255, 215, 0, 0.35);
+      box-shadow: 0 10px 45px rgba(0, 0, 0, 0.9);
+    }
+
+    header {
+      text-align: center;
+      padding: 70px 20px 40px;
+      position: relative;
+      z-index: 2;
+    }
+    h1 {
+      font-size: 56px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ffd700, #ffffff, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 40px rgba(255, 215, 0, 0.7);
+      animation: goldglow 4s ease infinite;
+    }
+    .subtitle { 
+      font-size: 21px; 
+      color: #bbb; 
+      margin-top: 15px; 
+      letter-spacing: 4px; 
+    }
+
+    .top-section {
+      padding: 40px 30px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .section-title {
+      font-size: 32px;
+      color: #ffd700;
+      text-align: center;
+      margin-bottom: 35px;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 18px;
+    }
+    .card {
+      padding: 20px 16px;
+      border-radius: 18px;
+      text-align: center;
+      transition: all 0.5s ease;
+    }
+    .card:hover {
+      transform: translateY(-12px);
+      background: rgba(255, 215, 0, 0.18);
+    }
+    .card h3 {
+      color: #ffd700;
+      margin: 8px 0 6px 0;
+      font-size: 18px;
+    }
+    .card p {
+      font-size: 15px;
+      color: #ddd;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 25px;
+    }
+    .social-links a {
+      padding: 14px 32px;
+      background: linear-gradient(45deg, #ffd700, #ffec8b);
+      color: #000;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 17px;
+      transition: all 0.4s;
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+    }
+    .social-links a:hover {
+      transform: scale(1.12);
+      box-shadow: 0 15px 40px rgba(255, 215, 0, 0.7);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 25px;
+      padding: 30px;
+      max-width: 1700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .gallery img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: pointer;
+    }
+    .gallery img:hover {
+      transform: scale(1.08) translateY(-15px);
+      box-shadow: 0 30px 60px rgba(255, 215, 0, 0.4);
+    }
+
+    footer {
+      padding: 60px 20px 40px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      border-top: 1px solid rgba(255, 215, 0, 0.2);
+      margin-top: 50px;
+    }
+    .footer-title {
+      font-size: 28px;
+      background: linear-gradient(90deg, #ffd700, #ffffff, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+    .footer-made {
+      font-size: 16px;
+      color: #888;
+    }
+
+    /* دکمه‌های ناوبری */
+    .nav-btn {
+      position: fixed;
+      right: 25px;
+      width: 55px;
+      height: 55px;
+      background: linear-gradient(45deg, #ffd700, #ffcc00);
+      color: #000;
+      border: none;
+      border-radius: 50%;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+      transition: all 0.4s ease;
+      z-index: 100;
+      user-select: none;
+    }
+
+    .nav-btn:hover {
+      transform: scale(1.15);
+      box-shadow: 0 12px 35px rgba(255, 215, 0, 0.7);
+    }
+
+    #scrollToBottom {
+      bottom: 30px;
+    }
+
+    #scrollToTop {
+      bottom: 100px;
+      display: none; /* ابتدا مخفی است */
+    }
+
+    @keyframes goldglow {
+      0%, 100% { opacity: 0.95; }
+      50% { opacity: 1; }
+    }
+    @keyframes slowglow {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 0.9; }
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.96);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 24px;
+      border: 3px solid #ffd700;
+      box-shadow: 0 0 100px rgba(255, 215, 0, 0.6);
+    }
+    .close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 60px;
+      color: #ffd700;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background"></div>
+  <div class="glow-layer"></div>
+  <div class="particles" id="particles"></div>
+
+  <header class="glass">
+    <h1>ART ROOM</h1>
+    <p class="subtitle">A Window Into Art</p>
+  </header>
+
+  <div class="top-section">
+    <div class="interests">
+      <h2 class="section-title">علایق من</h2>
+      <div class="cards" id="cards"></div>
+    </div>
+
+    <h2 class="section-title">ارتباط با من</h2>
+    <div class="social-links">
+      <a href="https://www.instagram.com/vortex2007org" target="_blank">اینستاگرام</a>
+      <a href="https://t.me/AMIR2007TTGH" target="_blank">پیوی تلگرام</a>
+      <a href="https://t.me/BLACK_VORTEX_ORG" target="_blank">کانال تلگرام</a>
+    </div>
+  </div>
+
+  <div class="gallery" id="gallery"></div>
+
+  <footer class="glass">
+    <div class="footer-title" id="footerTitle">
+    A Life Without Challenges Boring
+    </div>
+    <div class="footer-made">
+    Made In Black Vortex
+    </div>
+  </footer>
+
+  <!-- دکمه‌های ناوبری -->
+  <button id="scrollToBottom" class="nav-btn" title="به پایین صفحه">↓</button>
+  <button id="scrollToTop" class="nav-btn" title="به بالا صفحه">↑</button>
+
+  <div class="modal" id="modal">
+    <span class="close" onclick="closeModal()">×</span>
+    <img class="modal-content" id="modalImage">
+  </div>
+
+  <script>
+    function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 90; i++) {
+        const p = document.createElement('div');
+        const size = Math.random() * 3.5 + 1.5;
+        p.style.position = 'absolute';
+        p.style.width = size + 'px';
+        p.style.height = size + 'px';
+        p.style.background = 'radial-gradient(circle, #ffd700, transparent)';
+        p.style.borderRadius = '50%';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = Math.random() * 100 + '%';
+        p.style.opacity = Math.random() * 0.5 + 0.25;
+        p.style.animation = `floatParticle ${20 + Math.random() * 30}s linear infinite`;
+        p.style.animationDelay = `-${Math.random() * 40}s`;
+        container.appendChild(p);
+      }
+    }
+
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes floatParticle {
+        0% { transform: translateY(0) scale(1); }
+        100% { transform: translateY(-130vh) scale(0.4); }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // علایق
+    const interests = [
+      { title: "هوش مصنوعی", emoji: "🤖", desc: "آینده فناوری" },
+      { title: "کدنویسی و برنامه‌نویسی", emoji: "💻", desc: "ساختن دنیای دیجیتال" },
+      { title: "نرم‌افزار کامپیوتر", emoji: "🖥️", desc: "کار با سیستم" },
+      { title: "نرم‌افزار موبایل", emoji: "📱", desc: "اپلیکیشن و اندروید" },
+      { title: "الکترونیک", emoji: "⚡", desc: "گجت و مدار" },
+      { title: "موسیقی", emoji: "🎵", desc: "آهنگ و ریتم" },
+      { title: "نقاشی", emoji: "🎨", desc: "هنر بصری" },
+      { title: "هنر", emoji: "🖼️", desc: "خلاقیت هنری" },
+      { title: "فیلم و سریال", emoji: "🎬", desc: "سینما و داستان" }
+    ];
+
+    const cardsContainer = document.getElementById('cards');
+    interests.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'card glass';
+      card.innerHTML = `
+        <div style="font-size: 32px; margin-bottom: 8px;">${item.emoji}</div>
+        <h3>${item.title}</h3>
+        <p>${item.desc}</p>
+      `;
+      cardsContainer.appendChild(card);
+    });
+
+    // گالری - ۹۲ عکس
+    const gallery = document.getElementById('gallery');
+    for(let i = 1; i <= 92; i++) {
+      const img = document.createElement('img');
+      img.src = `a(${i}).jpg`;
+      img.alt = `عکس ${i}`;
+      img.loading = "lazy";
+      img.onclick = () => showModal(`a(${i}).jpg`);
+      gallery.appendChild(img);
+    }
+
+    // توابع Modal
+    function showModal(src) {
+      document.getElementById('modalImage').src = src;
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    // دکمه‌های ناوبری
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    const scrollToBottomBtn = document.getElementById('scrollToBottom');
+
+    // اسکرول به پایین
+    scrollToBottomBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    });
+
+    // اسکرول به بالا
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // نمایش/مخفی کردن دکمه به بالا
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 500) {
+        scrollToTopBtn.style.display = 'flex';
+      } else {
+        scrollToTopBtn.style.display = 'none';
+      }
+    });
+
+    createParticles();
+  </script>
+</body>
+</html>
